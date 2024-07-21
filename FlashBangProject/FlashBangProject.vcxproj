@@ -128,6 +128,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\Users\dgsto\Downloads\FlashBang-main\FlashBang-main\FlashBang\code\camera\OverheadCamera.cpp" />
     <ClCompile Include="..\FlashBangDependencies\glad\src\glad.c" />
     <ClCompile Include="..\FlashBang\code\audio\AIFFReader.cpp" />
     <ClCompile Include="..\FlashBang\code\audio\BinaryDataUtil.cpp" />
@@ -171,6 +172,7 @@
     <ClCompile Include="..\FlashBang\code\rendering\ShaderSource.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\Users\dgsto\Downloads\FlashBang-main\FlashBang-main\FlashBang\code\camera\OverheadCamera.h" />
     <ClInclude Include="..\FlashBangDependencies\stb\stb_image.h" />
     <ClInclude Include="..\FlashBang\code\audio\AIFFReader.h" />
     <ClInclude Include="..\FlashBang\code\audio\BinaryDataUtil.h" />
