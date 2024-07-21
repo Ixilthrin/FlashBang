@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{101980D0-AC4B-499E-8BD4-264C7E4DA027}</ProjectGuid>
+    <RootNamespace>FlashBangProject</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\programming\FlashBangDependencies\glfw-3.3\glfw-3.3.bin.WIN64\include;C:\programming\FlashBangDependencies\glad\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>C:\programming\FlashBangDependencies\glfw-3.3\glfw-3.3.bin.WIN64\lib-vc2017;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>..\FlashBangDependencies\openal\include;..\FlashBang\code\audio;..\FlashBang\code\carddeck;..\FlashBangDependencies\glfw-3.3\glfw-3.3.bin.WIN64\include;..\FlashBang\code\rendering;..\FlashBang\code\main;..\FlashBangDependencies\stb;..\FlashBang\code\programs;..\FlashBang\code\geometry;..\FlashBang\code\general;..\FlashBangDependencies\glad\include;..\FlashBang\code\eventing;..\FlashBangDependencies\glm-0.9.9.6\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>..\FlashBangDependencies\openal\libs\Win64;..\FlashBangDependencies\glfw-3.3\glfw-3.3.bin.WIN64\lib-vc2017;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3dll.lib;OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>cp $(ProjDir)..\FlashBangDependencies\glfw-3.3\glfw-3.3.bin.WIN64\lib-vc2017\glfw3.dll  $(OutDir)</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\FlashBangDependencies\glad\src\glad.c" />
+    <ClCompile Include="..\FlashBang\code\audio\AIFFReader.cpp" />
+    <ClCompile Include="..\FlashBang\code\audio\BinaryDataUtil.cpp" />
+    <ClCompile Include="..\FlashBang\code\audio\BinaryFileReader.cpp" />
+    <ClCompile Include="..\FlashBang\code\audio\DataReader.cpp" />
+    <ClCompile Include="..\FlashBang\code\audio\DiscreteFunction.cpp" />
+    <ClCompile Include="..\FlashBang\code\audio\SoundData.cpp" />
+    <ClCompile Include="..\FlashBang\code\audio\SoundStore.cpp" />
+    <ClCompile Include="..\FlashBang\code\audio\WaveReader.cpp" />
+    <ClCompile Include="..\FlashBang\code\carddeck\Card.cpp" />
+    <ClCompile Include="..\FlashBang\code\carddeck\CardDeck.cpp" />
+    <ClCompile Include="..\FlashBang\code\carddeck\CardDeckDispatchingMouseHandlers.cpp" />
+    <ClCompile Include="..\FlashBang\code\carddeck\CardDeckEventTranslator.cpp" />
+    <ClCompile Include="..\FlashBang\code\carddeck\CardDeckInputListener.cpp" />
+    <ClCompile Include="..\FlashBang\code\carddeck\CardGeometry.cpp" />
+    <ClCompile Include="..\FlashBang\code\carddeck\CardImageData.cpp" />
+    <ClCompile Include="..\FlashBang\code\eventing\OutputKeyboardHandlers.cpp" />
+    <ClCompile Include="..\FlashBang\code\eventing\OutputMouseHandlers.cpp" />
+    <ClCompile Include="..\FlashBang\code\general\Converter.cpp" />
+    <ClCompile Include="..\FlashBang\code\general\GLFWGraphicsWindow.cpp" />
+    <ClCompile Include="..\FlashBang\code\general\ImageReader.cpp" />
+    <ClCompile Include="..\FlashBang\code\general\Test.cpp" />
+    <ClCompile Include="..\FlashBang\code\geometry\Polyline.cpp" />
+    <ClCompile Include="..\FlashBang\code\main\main.cpp" />
+    <ClCompile Include="..\FlashBang\code\programs\Basic3DEngine.cpp" />
+    <ClCompile Include="..\FlashBang\code\programs\BasicCardDeck.cpp" />
+    <ClCompile Include="..\FlashBang\code\programs\BasicGraphicsLoop.cpp" />
+    <ClCompile Include="..\FlashBang\code\programs\BasicMouseSelection.cpp" />
+    <ClCompile Include="..\FlashBang\code\programs\BasicTriangle.cpp" />
+    <ClCompile Include="..\FlashBang\code\programs\BasicTriangleAlternateVBBinding.cpp" />
+    <ClCompile Include="..\FlashBang\code\programs\BasicWithoutLayoutQualifiers.cpp" />
+    <ClCompile Include="..\FlashBang\code\programs\GenerateGeometryExample.cpp" />
+    <ClCompile Include="..\FlashBang\code\programs\ProjectionOnlyShader.cpp" />
+    <ClCompile Include="..\FlashBang\code\programs\RotationShaderNoProjection.cpp" />
+    <ClCompile Include="..\FlashBang\code\programs\SampleGeometry.cpp" />
+    <ClCompile Include="..\FlashBang\code\programs\SampleModel.cpp" />
+    <ClCompile Include="..\FlashBang\code\programs\SampleProjectionModel.cpp" />
+    <ClCompile Include="..\FlashBang\code\programs\TriangleWithRotation.cpp" />
+    <ClCompile Include="..\FlashBang\code\programs\TwoTrianglesUsingIndexBuffer.cpp" />
+    <ClCompile Include="..\FlashBang\code\rendering\ShaderProgramFactory.cpp" />
+    <ClCompile Include="..\FlashBang\code\rendering\ShaderSource.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\FlashBangDependencies\stb\stb_image.h" />
+    <ClInclude Include="..\FlashBang\code\audio\AIFFReader.h" />
+    <ClInclude Include="..\FlashBang\code\audio\BinaryDataUtil.h" />
+    <ClInclude Include="..\FlashBang\code\audio\BinaryFileReader.h" />
+    <ClInclude Include="..\FlashBang\code\audio\DataReader.h" />
+    <ClInclude Include="..\FlashBang\code\audio\DataWriter.h" />
+    <ClInclude Include="..\FlashBang\code\audio\DiscreteFunction.h" />
+    <ClInclude Include="..\FlashBang\code\audio\SoundData.h" />
+    <ClInclude Include="..\FlashBang\code\audio\SoundStore.h" />
+    <ClInclude Include="..\FlashBang\code\audio\WaveReader.h" />
+    <ClInclude Include="..\FlashBang\code\carddeck\Card.h" />
+    <ClInclude Include="..\FlashBang\code\carddeck\CardDeck.h" />
+    <ClInclude Include="..\FlashBang\code\carddeck\CardDeckDispatchingMouseHandlers.h" />
+    <ClInclude Include="..\FlashBang\code\carddeck\CardDeckEventTranslator.h" />
+    <ClInclude Include="..\FlashBang\code\carddeck\CardDeckInputListener.h" />
+    <ClInclude Include="..\FlashBang\code\carddeck\CardGeometry.h" />
+    <ClInclude Include="..\FlashBang\code\carddeck\CardImageData.h" />
+    <ClInclude Include="..\FlashBang\code\eventing\OutputKeyboardHandlers.h" />
+    <ClInclude Include="..\FlashBang\code\eventing\OutputMouseHandlers.h" />
+    <ClInclude Include="..\FlashBang\code\general\Converter.h" />
+    <ClInclude Include="..\FlashBang\code\general\GLFWGraphicsWindow.h" />
+    <ClInclude Include="..\FlashBang\code\general\ImageReader.h" />
+    <ClInclude Include="..\FlashBang\code\general\IModel.h" />
+    <ClInclude Include="..\FlashBang\code\general\ZValues.h" />
+    <ClInclude Include="..\FlashBang\code\geometry\BoundingVolumes.h" />
+    <ClInclude Include="..\FlashBang\code\geometry\Bounds.h" />
+    <ClInclude Include="..\FlashBang\code\geometry\Polyline.h" />
+    <ClInclude Include="..\FlashBang\code\geometry\XYZ.h" />
+    <ClInclude Include="..\FlashBang\code\programs\Basic3DEngine.h" />
+    <ClInclude Include="..\FlashBang\code\programs\BasicCardDeck.h" />
+    <ClInclude Include="..\FlashBang\code\programs\BasicGraphicsLoop.h" />
+    <ClInclude Include="..\FlashBang\code\programs\BasicMouseSelection.h" />
+    <ClInclude Include="..\FlashBang\code\programs\BasicTriangle.h" />
+    <ClInclude Include="..\FlashBang\code\programs\BasicTriangleAlternateVBBinding.h" />
+    <ClInclude Include="..\FlashBang\code\programs\BasicWithoutLayoutQualifiers.h" />
+    <ClInclude Include="..\FlashBang\code\programs\GenerateGeometryExample.h" />
+    <ClInclude Include="..\FlashBang\code\programs\ProjectionOnlyShader.h" />
+    <ClInclude Include="..\FlashBang\code\programs\RotationShaderNoProjection.h" />
+    <ClInclude Include="..\FlashBang\code\programs\SampleGeometry.h" />
+    <ClInclude Include="..\FlashBang\code\programs\SampleModel.h" />
+    <ClInclude Include="..\FlashBang\code\programs\SampleProjectionModel.h" />
+    <ClInclude Include="..\FlashBang\code\programs\TriangleWithRotation.h" />
+    <ClInclude Include="..\FlashBang\code\programs\TwoTrianglesUsingIndexBuffer.h" />
+    <ClInclude Include="..\FlashBang\code\rendering\ShaderProgramFactory.h" />
+    <ClInclude Include="..\FlashBang\code\rendering\ShaderSource.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

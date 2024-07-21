@@ -1,0 +1,287 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\FlashBang\code\eventing\OutputKeyboardHandlers.cpp">
+      <Filter>eventing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FlashBang\code\eventing\OutputMouseHandlers.cpp">
+      <Filter>eventing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FlashBang\code\general\Converter.cpp">
+      <Filter>general</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FlashBang\code\general\GLFWGraphicsWindow.cpp">
+      <Filter>general</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FlashBang\code\general\Test.cpp">
+      <Filter>general</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FlashBang\code\geometry\Polyline.cpp">
+      <Filter>geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FlashBang\code\main\main.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FlashBang\code\programs\BasicGraphicsLoop.cpp">
+      <Filter>programs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FlashBang\code\programs\BasicMouseSelection.cpp">
+      <Filter>programs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FlashBang\code\programs\BasicTriangle.cpp">
+      <Filter>programs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FlashBang\code\programs\BasicTriangleAlternateVBBinding.cpp">
+      <Filter>programs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FlashBang\code\programs\BasicWithoutLayoutQualifiers.cpp">
+      <Filter>programs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FlashBang\code\programs\GenerateGeometryExample.cpp">
+      <Filter>programs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FlashBang\code\programs\ProjectionOnlyShader.cpp">
+      <Filter>programs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FlashBang\code\programs\RotationShaderNoProjection.cpp">
+      <Filter>programs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FlashBang\code\programs\SampleGeometry.cpp">
+      <Filter>programs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FlashBang\code\programs\SampleModel.cpp">
+      <Filter>programs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FlashBang\code\programs\SampleProjectionModel.cpp">
+      <Filter>programs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FlashBang\code\programs\TriangleWithRotation.cpp">
+      <Filter>programs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FlashBang\code\programs\TwoTrianglesUsingIndexBuffer.cpp">
+      <Filter>programs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FlashBangDependencies\glad\src\glad.c" />
+    <ClCompile Include="..\FlashBang\code\general\ImageReader.cpp">
+      <Filter>general</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FlashBang\code\programs\BasicCardDeck.cpp">
+      <Filter>programs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FlashBang\code\rendering\ShaderProgramFactory.cpp">
+      <Filter>rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FlashBang\code\rendering\ShaderSource.cpp">
+      <Filter>rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FlashBang\code\carddeck\Card.cpp">
+      <Filter>carddeck</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FlashBang\code\carddeck\CardDeck.cpp">
+      <Filter>carddeck</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FlashBang\code\carddeck\CardGeometry.cpp">
+      <Filter>carddeck</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FlashBang\code\carddeck\CardImageData.cpp">
+      <Filter>carddeck</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FlashBang\code\carddeck\CardDeckInputListener.cpp">
+      <Filter>carddeck</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FlashBang\code\carddeck\CardDeckEventTranslator.cpp">
+      <Filter>carddeck</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FlashBang\code\carddeck\CardDeckDispatchingMouseHandlers.cpp">
+      <Filter>carddeck</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FlashBang\code\audio\AIFFReader.cpp">
+      <Filter>audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FlashBang\code\audio\BinaryDataUtil.cpp">
+      <Filter>audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FlashBang\code\audio\BinaryFileReader.cpp">
+      <Filter>audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FlashBang\code\audio\DataReader.cpp">
+      <Filter>audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FlashBang\code\audio\DiscreteFunction.cpp">
+      <Filter>audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FlashBang\code\audio\SoundData.cpp">
+      <Filter>audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FlashBang\code\audio\WaveReader.cpp">
+      <Filter>audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FlashBang\code\audio\SoundStore.cpp">
+      <Filter>audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FlashBang\code\programs\Basic3DEngine.cpp">
+      <Filter>programs</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\FlashBang\code\eventing\OutputKeyboardHandlers.h">
+      <Filter>eventing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\eventing\OutputMouseHandlers.h">
+      <Filter>eventing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\general\Converter.h">
+      <Filter>general</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\general\GLFWGraphicsWindow.h">
+      <Filter>general</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\general\IModel.h">
+      <Filter>general</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\general\ZValues.h">
+      <Filter>general</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\geometry\BoundingVolumes.h">
+      <Filter>geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\geometry\Bounds.h">
+      <Filter>geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\geometry\Polyline.h">
+      <Filter>geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\geometry\XYZ.h">
+      <Filter>geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\programs\BasicGraphicsLoop.h">
+      <Filter>programs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\programs\BasicMouseSelection.h">
+      <Filter>programs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\programs\BasicTriangle.h">
+      <Filter>programs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\programs\BasicTriangleAlternateVBBinding.h">
+      <Filter>programs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\programs\BasicWithoutLayoutQualifiers.h">
+      <Filter>programs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\programs\GenerateGeometryExample.h">
+      <Filter>programs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\programs\ProjectionOnlyShader.h">
+      <Filter>programs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\programs\RotationShaderNoProjection.h">
+      <Filter>programs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\programs\SampleGeometry.h">
+      <Filter>programs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\programs\SampleModel.h">
+      <Filter>programs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\programs\SampleProjectionModel.h">
+      <Filter>programs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\programs\TriangleWithRotation.h">
+      <Filter>programs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\programs\TwoTrianglesUsingIndexBuffer.h">
+      <Filter>programs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBangDependencies\stb\stb_image.h" />
+    <ClInclude Include="..\FlashBang\code\general\ImageReader.h">
+      <Filter>general</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\programs\BasicCardDeck.h">
+      <Filter>programs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\rendering\ShaderProgramFactory.h">
+      <Filter>rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\rendering\ShaderSource.h">
+      <Filter>rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\carddeck\Card.h">
+      <Filter>carddeck</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\carddeck\CardDeck.h">
+      <Filter>carddeck</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\carddeck\CardGeometry.h">
+      <Filter>carddeck</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\carddeck\CardImageData.h">
+      <Filter>carddeck</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\carddeck\CardDeckInputListener.h">
+      <Filter>carddeck</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\carddeck\CardDeckEventTranslator.h">
+      <Filter>carddeck</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\carddeck\CardDeckDispatchingMouseHandlers.h">
+      <Filter>carddeck</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\audio\AIFFReader.h">
+      <Filter>audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\audio\BinaryDataUtil.h">
+      <Filter>audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\audio\BinaryFileReader.h">
+      <Filter>audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\audio\DataReader.h">
+      <Filter>audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\audio\DataWriter.h">
+      <Filter>audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\audio\DiscreteFunction.h">
+      <Filter>audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\audio\SoundData.h">
+      <Filter>audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\audio\WaveReader.h">
+      <Filter>audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\audio\SoundStore.h">
+      <Filter>audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlashBang\code\programs\Basic3DEngine.h">
+      <Filter>programs</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="eventing">
+      <UniqueIdentifier>{7347fad8-af84-42ec-a62a-1e6c357ed4a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="general">
+      <UniqueIdentifier>{300b0711-6af8-44c3-9ebf-cf9e4fe69cca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="geometry">
+      <UniqueIdentifier>{c1f809d4-0033-4461-9c91-c908748bf338}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main">
+      <UniqueIdentifier>{88c02384-9e5a-4629-a7ef-83d99fcb9d74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="programs">
+      <UniqueIdentifier>{c1524f7a-7e12-4064-8ae0-c027f4400a90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="rendering">
+      <UniqueIdentifier>{c11b4d49-0282-4689-af04-eccbfcaf5718}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="carddeck">
+      <UniqueIdentifier>{0bcb1418-4a1b-4938-8477-b12ba01897f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="audio">
+      <UniqueIdentifier>{4868aa67-1810-4b90-8da8-f4e585625352}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,22 @@
+#!/usr/bin/perl
+# Convert to unix line endings and replace tabs with spaces
+# If you use od -c you can see tabs and line endings
+# If you use git add -A -n you can see files that will be added
+# If you use git add -A then those files from above will be added
+my @files = @ARGV;
+
+for my $file ( @files ) {
+    open FILE, $file or next;        # thanks turnstep
+    my @lines = <FILE>;
+    close FILE;
+
+    foreach my $i ( 0..$#lines ) {
+        $lines[$i] =~ s/\t/    /g;
+        $lines[$i] =~ s/\r\n/\n/g;
+    }
+
+    open FILE,">$file";
+    print FILE @lines;
+    close FILE;
+}
+
