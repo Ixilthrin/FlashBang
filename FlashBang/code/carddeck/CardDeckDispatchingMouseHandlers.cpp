@@ -50,7 +50,8 @@ void CardDeckDispatchingMouseHandlers::mouse_button_callback(GLFWwindow* window,
         translator->translateMouseEvent(CardDeckEventTranslator::EventType::RightMouseUp);
     }
 }
-void CardDeckDispatchingMouseHandlers::scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
+void CardDeckDispatchingMouseHandlers::mouse_wheel_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
     //std::cout << "Scrolling" << std::endl;
+    translator->translateMouseWheelMove(yoffset);
 }

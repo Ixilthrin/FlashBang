@@ -9,6 +9,7 @@
 #include <map>
 #include <string>
 #include <filesystem>
+#include <thread>
 namespace fs = std::filesystem;
 
 using std::endl;
@@ -24,6 +25,7 @@ using std::vector;
 
 #include "CardGeometry.h"
 #include "ShaderProgramFactory.h"
+#include "OverheadCamera.h"
 
 //#include <ft2build.h>
 //#include FT_FREETYPE_H  
@@ -35,7 +37,8 @@ BasicCardDeck::BasicCardDeck()
     _width = 1600;
     _height = 900;
     _textureNames = 0;
-    _listener = new CardDeckInputListener();
+    _camera = new OverheadCamera();
+    _listener = new CardDeckInputListener(_camera);
     _deck = new CardDeck();
     _translator = new CardDeckEventTranslator();
 }
@@ -47,9 +50,9 @@ BasicCardDeck::~BasicCardDeck()
 int BasicCardDeck::Start()
 {
     string deck = getDeck();
-    float scale = getScale();
-    float xPosition = getXPosition();
-    float yPosition = getYPosition();
+    float scale = 1;// getScale();
+    float xPosition = 50; // getXPosition();
+    float yPosition = 50; // getYPosition();
 
     int result = initializeWindow();
     if (result != 0)
@@ -81,6 +84,7 @@ int BasicCardDeck::Start()
         renderFrame();
         glfwSwapBuffers(_window);
         glfwPollEvents();
+        std::this_thread::sleep_for(std::chrono::milliseconds(20));
     }
 
     cleanUp();
@@ -379,6 +383,7 @@ int BasicCardDeck::setupUniformLocations()
     _translationLocation = glGetUniformLocation(_programHandle, "Translation");
     _rotationYLocation = glGetUniformLocation(_programHandle, "RotationY");
     _objectWidthLocation = glGetUniformLocation(_programHandle, "ObjectWidth");
+    _zoomFactorLocation = glGetUniformLocation(_programHandle, "ZoomFactor");
 
     return 0;
 }
@@ -464,12 +469,13 @@ int BasicCardDeck::cleanUp()
 int BasicCardDeck::setupEventListeners()
 {
     _listener->setDeck(_deck);
+    _listener->setCamera(_camera);
     CardDeckDispatchingMouseHandlers::translator = _translator;
     _translator->registerListener(_listener);
     glfwSetCursorPosCallback(_window, CardDeckDispatchingMouseHandlers::cursor_position_callback);
     glfwSetCursorEnterCallback(_window, CardDeckDispatchingMouseHandlers::cursor_enter_callback);
     glfwSetMouseButtonCallback(_window, CardDeckDispatchingMouseHandlers::mouse_button_callback);
-    glfwSetScrollCallback(_window, CardDeckDispatchingMouseHandlers::scroll_callback);
+    glfwSetScrollCallback(_window, CardDeckDispatchingMouseHandlers::mouse_wheel_callback);
     return 0;
 }
 
@@ -490,20 +496,27 @@ void BasicCardDeck::renderFrame()
 {
     glClear(GL_COLOR_BUFFER_BIT);
 
+    if (_zoomFactorLocation != -1)
+    {
+        float zoom = _camera->getZoomFactor();
+        glUniform1f(_zoomFactorLocation, zoom);
+    }
+
     //if (true)
     if (_translationLocation != -1)
     {
-        float xTrans, yTrans;
+        float xTrans{ 0 }, yTrans{ 0 };
 
         int objectCount = 0;
         vector<int> ids = _deck->getIds();
         for (auto const& id : ids)
         {
             auto card = _deck->get(id);
+            auto width = _converter->screenTranslationXToNDC(card->getWidth());
             if (card->hasFlipSide() && card->requestFlip())
             {
                 glUniform1f(_rotationYLocation, _currentFlipRotation);
-                glUniform1f(_objectWidthLocation, _converter->screenTranslationXToNDC(card->getWidth()));
+                glUniform1f(_objectWidthLocation, width);
                 _currentFlipRotation += .25;
                 if (_currentFlipRotation > 1.57 && !_flippedHalf)
                 {
@@ -534,8 +547,8 @@ void BasicCardDeck::renderFrame()
             int selected = _listener->getSelectedId();
             if (_listener->isSelectAndMoveInProgress() && selected == id)
             {
-                xTrans = _converter->screenTranslationXToNDC(_deck->get(selected)->getTranslationX() + _listener->getMovementX());
-                yTrans = _converter->screenTranslationYToNDC(_deck->get(selected)->getTranslationY() + _listener->getMovementY());
+                xTrans = _converter->screenTranslationXToNDC(_deck->get(id)->getTranslationX() + _listener->getMovementX());
+                yTrans = _converter->screenTranslationYToNDC(_deck->get(id)->getTranslationY() + _listener->getMovementY());
             }
             else
             {

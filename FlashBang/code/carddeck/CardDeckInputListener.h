@@ -2,6 +2,7 @@
 
 #include "CardDeck.h"
 #include "Card.h"
+#include "OverheadCamera.h"
 
 class CardDeckInputListener
 {
@@ -10,15 +11,20 @@ private:
     int _mouseY;
     bool _selectAndMoveInProgress;
     CardDeck *_deck;
+    OverheadCamera* _camera;
     int _selectionStartX;
     int _selectionStartY;
     int _selectedId;
 
 public:
-    CardDeckInputListener();
+    CardDeckInputListener(OverheadCamera *camera);
     inline void setDeck(CardDeck *deck)
     {
         _deck = deck;
+    }
+    inline void setCamera(OverheadCamera* camera)
+    {
+        _camera = camera;
     }
 
     inline int getMovementX()
@@ -35,9 +41,11 @@ public:
     void moveSelection(int x, int y);
     void endSelect(int x, int y);
     void flip(int x, int y);
+    void mouseWheelMoved(float yoffset);
 
     bool isSelectAndMoveInProgress();
     int getMouseX();
     int getMouseY();
     int getSelectedId();
+
 };

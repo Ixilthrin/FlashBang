@@ -1,11 +1,15 @@
 #include "CardDeckEventTranslator.h"
 
+CardDeckEventTranslator::CardDeckEventTranslator()
+{
+}
+
 void CardDeckEventTranslator::registerListener(CardDeckInputListener *listener)
 {
     _listener = listener;
 }
 
-void CardDeckEventTranslator::mouseMoved(int x, int y)
+void CardDeckEventTranslator::mouseMoved(double x, double y)
 {
     _listener->moveSelection(x, y);
     _mouseX = x;
@@ -26,4 +30,9 @@ void CardDeckEventTranslator::translateMouseEvent(EventType type)
     {
         _listener->flip(_mouseX, _mouseY);
     }
+}
+
+void CardDeckEventTranslator::translateMouseWheelMove(double yoffset)
+{
+    _listener->mouseWheelMoved(yoffset);
 }

@@ -3,18 +3,18 @@
 class OverheadCamera
 {
 private:
-    int _translationX;
-    int _translationY;
-    int _zoomFactor;
+    float _translationX;
+    float _translationY;
+    float _zoomFactor;
 
 public:
     OverheadCamera();
 
-    void setTranslationX(int translation);
-    void setTranslationY(int translation);
+    void setTranslationX(float translation);
+    void setTranslationY(float translation);
     void setZoomFactor(float zoomFactor);
 
-    int getTranslationX();
-    int getTranslationY();
+    float getTranslationX();
+    float getTranslationY();
     float getZoomFactor();
 };

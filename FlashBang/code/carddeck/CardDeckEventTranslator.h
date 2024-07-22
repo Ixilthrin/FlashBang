@@ -1,16 +1,18 @@
 #pragma once
 
 #include "CardDeckInputListener.h"
-
+#include "OverheadCamera.h"
 
 class CardDeckEventTranslator
 {
 private:
-    int _mouseX;
-    int _mouseY;
+    double _mouseX;
+    double _mouseY;
     CardDeckInputListener *_listener;
 
 public:
+
+    CardDeckEventTranslator();
     enum EventType
     {
         LeftMouseDown,
@@ -20,7 +22,7 @@ public:
     };
 
     void registerListener(CardDeckInputListener *listener);
-    void mouseMoved(int x, int y);
+    void mouseMoved(double x, double y);
     void translateMouseEvent(EventType type);
-
+    void translateMouseWheelMove(double yoffset);
 };

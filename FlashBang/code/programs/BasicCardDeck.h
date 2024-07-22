@@ -20,11 +20,13 @@ private:
     int _height;
     GLFWwindow* _window;
     CardDeck *_deck;
+    OverheadCamera* _camera;
     CardDeckInputListener *_listener;
     CardDeckEventTranslator *_translator;
     GLint _translationLocation;
     GLint _rotationYLocation;
     GLint _objectWidthLocation; 
+    GLint _zoomFactorLocation;
     GLuint _programHandle; 
     GLuint _positionBufferHandle; 
     GLuint _colorBufferHandle;

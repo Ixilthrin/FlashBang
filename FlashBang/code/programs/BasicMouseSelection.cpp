@@ -203,7 +203,7 @@ int BasicMouseSelection::Start()
     glVertexAttribFormat(2, 2, GL_FLOAT, GL_FALSE, 0);
     glVertexAttribBinding(2, 2);
 
-    CardDeckInputListener listener;
+    CardDeckInputListener listener(nullptr);
     listener.setDeck(&deck);
 
     GLint loc = glGetUniformLocation(programHandle, "Translation");
@@ -238,14 +238,14 @@ int BasicMouseSelection::Start()
 
     glBindTextureUnit(0, textureNames[0]);
 
-    CardDeckEventTranslator translator;
+    CardDeckEventTranslator translator{};
 
     CardDeckDispatchingMouseHandlers::translator = &translator;
     translator.registerListener(&listener);
     glfwSetCursorPosCallback(window, CardDeckDispatchingMouseHandlers::cursor_position_callback);
     glfwSetCursorEnterCallback(window, CardDeckDispatchingMouseHandlers::cursor_enter_callback);
     glfwSetMouseButtonCallback(window, CardDeckDispatchingMouseHandlers::mouse_button_callback);
-    glfwSetScrollCallback(window, CardDeckDispatchingMouseHandlers::scroll_callback);
+    glfwSetScrollCallback(window, CardDeckDispatchingMouseHandlers::mouse_wheel_callback);
 
 
     while (!glfwWindowShouldClose(window))
