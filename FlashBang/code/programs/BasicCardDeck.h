@@ -26,7 +26,8 @@ private:
     GLint _translationLocation;
     GLint _rotationYLocation;
     GLint _objectWidthLocation; 
-    GLint _zoomFactorLocation;
+    GLint _zoomFactorLocation; 
+    GLint _cameraTranslationLocation;
     GLuint _programHandle; 
     GLuint _positionBufferHandle; 
     GLuint _colorBufferHandle;

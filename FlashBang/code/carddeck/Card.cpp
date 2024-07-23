@@ -111,7 +111,7 @@ void Card::flipComplete()
 
 std::string Card::getVertexShaderPath()
 {
-    return "../FlashBang/shaders/translate_rotatey_texture.vert.glsl";
+    return "../FlashBang/shaders/translate_rotatey_zoom_texture.vert.glsl";
     //return "../FlashBang/shaders/translation_and_texture.vert.glsl";
     //return "../FlashBang/shaders/default.vert.glsl";
 }

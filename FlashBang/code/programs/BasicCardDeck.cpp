@@ -384,6 +384,7 @@ int BasicCardDeck::setupUniformLocations()
     _rotationYLocation = glGetUniformLocation(_programHandle, "RotationY");
     _objectWidthLocation = glGetUniformLocation(_programHandle, "ObjectWidth");
     _zoomFactorLocation = glGetUniformLocation(_programHandle, "ZoomFactor");
+    _cameraTranslationLocation = glGetUniformLocation(_programHandle, "CameraTranslation");
 
     return 0;
 }
@@ -502,6 +503,14 @@ void BasicCardDeck::renderFrame()
         glUniform1f(_zoomFactorLocation, zoom);
     }
 
+    if (_cameraTranslationLocation != -1)
+    {
+        //float transX = _camera->getTranslationX();
+        //float transY = _camera->getTranslationY();
+        //glUniform2f(_cameraTranslationLocation, transX, transY);
+        //cout << "trans:  " << transX << ",  " << transY << endl;
+    }
+
     //if (true)
     if (_translationLocation != -1)
     {
@@ -549,14 +558,34 @@ void BasicCardDeck::renderFrame()
             {
                 xTrans = _converter->screenTranslationXToNDC(_deck->get(id)->getTranslationX() + _listener->getMovementX());
                 yTrans = _converter->screenTranslationYToNDC(_deck->get(id)->getTranslationY() + _listener->getMovementY());
+                glUniform2f(_translationLocation, xTrans, yTrans);
+            }
+            else if (_listener->isSelectAndMoveInProgress() && selected == -1)
+            {
+                xTrans = _converter->screenTranslationXToNDC(_camera->getTranslationX());
+                yTrans = _converter->screenTranslationYToNDC(_camera->getTranslationY());
+
+
+                if (_cameraTranslationLocation != -1)
+                {
+                    //glUniform2f(_cameraTranslationLocation, xTrans, yTrans);
+                    //glUniform2f(_cameraTranslationLocation, 0, 0);
+
+                    //cout << endl << endl;
+                    //cout << "xTrans: " << xTrans << endl;
+                    //cout << "yTrans: " << yTrans << endl;
+                }
+
+                xTrans = _converter->screenTranslationXToNDC(_deck->get(id)->getTranslationX());
+                yTrans = _converter->screenTranslationYToNDC(_deck->get(id)->getTranslationY());
+                glUniform2f(_translationLocation, xTrans, yTrans);
             }
             else
             {
                 xTrans = _converter->screenTranslationXToNDC(_deck->get(id)->getTranslationX());
                 yTrans = _converter->screenTranslationYToNDC(_deck->get(id)->getTranslationY());
+                glUniform2f(_translationLocation, xTrans, yTrans);
             }
-
-            glUniform2f(_translationLocation, xTrans, yTrans); 
 
             glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, &(_indexData.data())[_indexOffsets[id]]);
         }
