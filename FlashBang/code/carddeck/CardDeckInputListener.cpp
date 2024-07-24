@@ -24,6 +24,12 @@ CardDeckInputListener::CardDeckInputListener(shared_ptr<AppContext> context, Ove
     _camera = camera;
 }
 
+/*
+*  The inputs are screen space.  The models as seen by the
+*  user are in view space.  To get to view space each model
+*  is first translated to world space then the shader used
+*  the w coordinate for zoom.
+*/
 pair<int, int> CardDeckInputListener::computeTransformation(int x, int y)
 {
     int windowWidth = _context->getWindowWidth();
@@ -33,12 +39,13 @@ pair<int, int> CardDeckInputListener::computeTransformation(int x, int y)
     {
         zoomFactor = _camera->getZoomFactor();
     }
+
     int worldX = x - (windowWidth / 2);
     int worldY = y - (windowHeight / 2);
     worldX = (float)worldX * zoomFactor;
     worldY = (float)worldY * zoomFactor;
-    worldX += (windowWidth / 2);
-    worldY += (windowHeight / 2);
+    worldX += (windowWidth / 2) + _camera->getTranslationX();
+    worldY += (windowHeight / 2) + _camera->getTranslationY();
 
     return  make_pair(worldX, worldY);
 }
@@ -131,7 +138,8 @@ void CardDeckInputListener::endSelect(int x, int y)
             float transY = (float)(_mouseY - _selectionStartY);
             float initialTransX = _camera->getTranslationX();
             float initialTransY = _camera->getTranslationY();
-            _camera->setTranslationX(_camera->getTranslationX() + transX);
+            _camera->setTranslationX(_camera->getTranslationX() - transX);
+            _camera->setTranslationY(_camera->getTranslationY() - transY);
         }
         _mouseX = 0;
         _mouseY = 0;
