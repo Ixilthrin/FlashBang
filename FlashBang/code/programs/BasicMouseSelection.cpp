@@ -6,6 +6,14 @@
 #include <sstream>
 #include <fstream>
 
+#include "CardDeckDispatchingMouseHandlers.h" // Interesting: putting this after next line causes link errors
+#include <GLFW/glfw3.h>
+
+#include "ShaderSource.h"
+#include "Card.h"
+#include "Converter.h"
+#include "ImageReader.h"
+
 using std::endl;
 using std::cout;
 using std::cin;
@@ -13,18 +21,13 @@ using std::cerr;
 using std::string;
 using std::ifstream;
 using std::stringstream;
-
-#include "CardDeckDispatchingMouseHandlers.h" // Interesting: putting this after next line causes link errors
-#include <GLFW/glfw3.h>
-
-#include "ShaderSource.h"
-#include "Card.h"
-#include "Converter.h"
-
-#include "ImageReader.h"
+using std::make_shared;
 
 BasicMouseSelection::BasicMouseSelection()
 {
+    _context = make_shared<AppContext>();
+    _context->setWindowWidth(640);
+    _context->setWindowHeight(480);
 }
 
 BasicMouseSelection::~BasicMouseSelection()
@@ -203,7 +206,7 @@ int BasicMouseSelection::Start()
     glVertexAttribFormat(2, 2, GL_FLOAT, GL_FALSE, 0);
     glVertexAttribBinding(2, 2);
 
-    CardDeckInputListener listener{};
+    CardDeckInputListener listener{_context, nullptr};
     listener.setDeck(&deck);
 
     GLint loc = glGetUniformLocation(programHandle, "Translation");
