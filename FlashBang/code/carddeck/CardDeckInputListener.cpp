@@ -2,9 +2,11 @@
 
 #include <iostream>
 #include <vector>
+
+using std::make_pair;
 using std::vector;
 
-CardDeckInputListener::CardDeckInputListener(OverheadCamera *camera)
+CardDeckInputListener::CardDeckInputListener()
 {
     _selectAndMoveInProgress = false;
     _mouseX = 0;
@@ -12,36 +14,40 @@ CardDeckInputListener::CardDeckInputListener(OverheadCamera *camera)
     _selectionStartX = 0;
     _selectionStartY = 0;
     _selectedId = -1;
+    _deck = nullptr;
+    _soundPlayed = false;
+}
+CardDeckInputListener::CardDeckInputListener(shared_ptr<AppContext> context, OverheadCamera *camera)
+    : CardDeckInputListener()
+{
+    _context = context;
     _camera = camera;
 }
 
-bool slideSoundPlayed = true;
-
-void CardDeckInputListener::select(int x, int y)
+pair<int, int> CardDeckInputListener::computeTransformation(int x, int y)
 {
-    // TODO : This is used in several places so refactor
-    // TODO : 800 and 450 are hard-coded - should get screen height & width from window
+    int windowWidth = _context->getWindowWidth();
+    int windowHeight = _context->getWindowHeight();
     float zoomFactor = 1;
-    float transX = 0;
-    float transY = 0;
     if (_camera)
     {
         zoomFactor = _camera->getZoomFactor();
-        transX = _camera->getTranslationX();
-        transY = -_camera->getTranslationY();
     }
-    int worldX = x - 800;
-    int worldY = y - 450;
+    int worldX = x - (windowWidth / 2);
+    int worldY = y - (windowHeight / 2);
     worldX = (float)worldX * zoomFactor;
     worldY = (float)worldY * zoomFactor;
-    worldX += 800;
-    worldY += 450;
-    cout << "\n\nworldX:  " << worldX << endl;
-    cout << "worldY:  " << worldY << endl;
-    cout << "transX:  " << transX << endl;
-    cout << "transY:  " << transY << endl;
+    worldX += (windowWidth / 2);
+    worldY += (windowHeight / 2);
 
-    slideSoundPlayed = false;
+    return  make_pair(worldX, worldY);
+}
+
+void CardDeckInputListener::select(int x, int y)
+{
+    pair<int, int> worldCoords = computeTransformation(x, y);
+
+    _soundPlayed = false;
 
     bool itemSelected = false;
     vector<int> ids = _deck->getIds();
@@ -51,15 +57,15 @@ void CardDeckInputListener::select(int x, int y)
         Card *card = _deck->get(*it);
         if (card)
         {
-            if (card->contains(worldX, worldY))
+            if (card->contains(worldCoords.first, worldCoords.second))
             {
                 itemSelected = true;
                 if (!_selectAndMoveInProgress)
                 {
-                    _selectionStartX = worldX;
-                    _selectionStartY = worldY;
-                    _mouseX = worldX;
-                    _mouseY = worldY;
+                    _selectionStartX = worldCoords.first;
+                    _selectionStartY = worldCoords.second;
+                    _mouseX = worldCoords.first;
+                    _mouseY = worldCoords.second;
                 }
                 _selectedId = *it;
                 _selectAndMoveInProgress = true;
@@ -73,59 +79,37 @@ void CardDeckInputListener::select(int x, int y)
     {
         if (!_selectAndMoveInProgress)
         {
-            _selectionStartX = worldX;
-            _selectionStartY = worldY;
-            _mouseX = worldX;
-            _mouseY = worldY;
+            _selectionStartX = worldCoords.first;
+            _selectionStartY = worldCoords.second;
+            _mouseX = worldCoords.first;
+            _mouseY = worldCoords.second;
         }
         _selectAndMoveInProgress = true;
     }
-
-    //_selectAndMoveInProgress = true;
 }
 
 void CardDeckInputListener::moveSelection(int x, int y)
 {
-    // TODO : This is used in several places so refactor
-    // TODO : 800 and 450 are hard-coded - should get screen height & width from window
-    float zoomFactor = 1;
-    float transX = 0;
-    float transY = 0;
-    if (_camera)
-    {
-        zoomFactor = _camera->getZoomFactor();
-        transX = _camera->getTranslationX();
-        transY = -_camera->getTranslationY();
-    }
-    int worldX = x - 800;
-    int worldY = y - 450;
-    worldX = (float)worldX * zoomFactor;
-    worldY = (float)worldY * zoomFactor;
-    worldX += 800;
-    worldY += 450;
-    //cout << "\n\nworldX:  " << worldX << endl;
-    //cout << "worldY:  " << worldY << endl;
-    //cout << "transX:  " << transX << endl;
-    //cout << "transY:  " << transY << endl;
+    pair<int, int> worldCoords = computeTransformation(x, y);
 
     Card *card = _deck->get(_selectedId);
     if (_selectAndMoveInProgress)
     {
-        _mouseX = worldX;
-        _mouseY = worldY;
+        _mouseX = worldCoords.first;
+        _mouseY = worldCoords.second;
 
         if (card)
         {
-            if (!slideSoundPlayed)
+            if (!_soundPlayed)
             {
                 _deck->playSound(0);
-                slideSoundPlayed = true;
+                _soundPlayed = true;
             }
 
             _deck->bringToTop(_deck->getId(card));
         }
     }
-    else if (card && card->contains(worldX, worldY))
+    else if (card && card->contains(worldCoords.first, worldCoords.second))
     {
         //std::cout << "Mouse Over" << std::endl;
     }
@@ -143,21 +127,11 @@ void CardDeckInputListener::endSelect(int x, int y)
         }
         else
         {
-            //float transX = (_camera->getTranslationX() + _mouseX - _selectionStartX) / 1600;
-            //float transY = (_camera->getTranslationY() + _mouseY - _selectionStartY) / 900;
             float transX = (float)(_mouseX - _selectionStartX);
             float transY = (float)(_mouseY - _selectionStartY);
             float initialTransX = _camera->getTranslationX();
             float initialTransY = _camera->getTranslationY();
             _camera->setTranslationX(_camera->getTranslationX() + transX);
-            ///_camera->setTranslationY(_camera->getTranslationY() + transY);
-            ///float finalTransX = _camera->getTranslationX();
-            ///float finalTransY = _camera->getTranslationY();
-            //cout << "\n\ntransX: " << initialTransX << endl;
-            //cout << "transY: " << initialTransX << endl;
-            //cout << "\n\ntransX: " << finalTransX << endl;
-            //cout << "transY: " << finalTransX << endl;
-
         }
         _mouseX = 0;
         _mouseY = 0;
@@ -171,34 +145,14 @@ void CardDeckInputListener::endSelect(int x, int y)
 
 void CardDeckInputListener::flip(int x, int y)
 {
-    // TODO : This is used in several places so refactor
-    // TODO : 800 and 450 are hard-coded - should get screen height & width from window
-    float zoomFactor = 1;
-    float transX = 0;
-    float transY = 0;
-    if (_camera)
-    {
-        zoomFactor = _camera->getZoomFactor();
-        transX = _camera->getTranslationX() * 1600;
-        transY = -_camera->getTranslationY() * 900;
-    }
-    int worldX = x - 800;
-    int worldY = y - 450;
-    worldX = (float)worldX * zoomFactor;
-    worldY = (float)worldY * zoomFactor;
-    worldX += 800;
-    worldY += 450;
-    cout << "\n\nworldX:  " << worldX << endl;
-    cout << "worldY:  " << worldY << endl;
-    cout << "transX:  " << transX << endl;
-    cout << "transY:  " << transY << endl;
+    pair<int, int> worldCoords = computeTransformation(x, y);
 
     auto ids = _deck->getIds();
     auto it = ids.rbegin();
     while (it != ids.rend())
     {
         Card *card = _deck->get(*it);
-        if (card && card->contains(worldX, worldY))
+        if (card && card->contains(worldCoords.first, worldCoords.second))
         {
             if (card->hasFlipSide())
             {

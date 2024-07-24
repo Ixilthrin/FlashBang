@@ -125,6 +125,9 @@
     <ClCompile Include="..\..\..\..\Users\dgsto\Downloads\FlashBang-main\FlashBang-main\FlashBang\code\camera\OverheadCamera.cpp">
       <Filter>camera</Filter>
     </ClCompile>
+    <ClCompile Include="..\FlashBang\code\context\AppContext.cpp">
+      <Filter>context</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\FlashBang\code\eventing\OutputKeyboardHandlers.h">
@@ -263,6 +266,9 @@
     <ClInclude Include="..\..\..\..\Users\dgsto\Downloads\FlashBang-main\FlashBang-main\FlashBang\code\camera\OverheadCamera.h">
       <Filter>camera</Filter>
     </ClInclude>
+    <ClInclude Include="..\FlashBang\code\context\AppContext.h">
+      <Filter>context</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="eventing">
@@ -291,6 +297,9 @@
     </Filter>
     <Filter Include="camera">
       <UniqueIdentifier>{6db35f30-8bbb-40a3-b3c3-0d9fd2cc5311}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="context">
+      <UniqueIdentifier>{dbf43d60-0e8d-4df7-9683-981cfd83000a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

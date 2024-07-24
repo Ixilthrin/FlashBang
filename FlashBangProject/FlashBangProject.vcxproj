@@ -88,7 +88,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\FlashBangDependencies\openal\include;..\FlashBang\code\audio;..\FlashBang\code\camera;..\FlashBang\code\carddeck;..\FlashBangDependencies\glfw-3.3\glfw-3.3.bin.WIN64\include;..\FlashBang\code\rendering;..\FlashBang\code\main;..\FlashBangDependencies\stb;..\FlashBang\code\programs;..\FlashBang\code\geometry;..\FlashBang\code\general;..\FlashBangDependencies\glad\include;..\FlashBang\code\eventing;..\FlashBangDependencies\glm-0.9.9.6\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\FlashBang\code\context;..\FlashBangDependencies\openal\include;..\FlashBang\code\audio;..\FlashBang\code\camera;..\FlashBang\code\carddeck;..\FlashBangDependencies\glfw-3.3\glfw-3.3.bin.WIN64\include;..\FlashBang\code\rendering;..\FlashBang\code\main;..\FlashBangDependencies\stb;..\FlashBang\code\programs;..\FlashBang\code\geometry;..\FlashBang\code\general;..\FlashBangDependencies\glad\include;..\FlashBang\code\eventing;..\FlashBangDependencies\glm-0.9.9.6\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -145,6 +145,7 @@
     <ClCompile Include="..\FlashBang\code\carddeck\CardDeckInputListener.cpp" />
     <ClCompile Include="..\FlashBang\code\carddeck\CardGeometry.cpp" />
     <ClCompile Include="..\FlashBang\code\carddeck\CardImageData.cpp" />
+    <ClCompile Include="..\FlashBang\code\context\AppContext.cpp" />
     <ClCompile Include="..\FlashBang\code\eventing\OutputKeyboardHandlers.cpp" />
     <ClCompile Include="..\FlashBang\code\eventing\OutputMouseHandlers.cpp" />
     <ClCompile Include="..\FlashBang\code\general\Converter.cpp" />
@@ -190,6 +191,7 @@
     <ClInclude Include="..\FlashBang\code\carddeck\CardDeckInputListener.h" />
     <ClInclude Include="..\FlashBang\code\carddeck\CardGeometry.h" />
     <ClInclude Include="..\FlashBang\code\carddeck\CardImageData.h" />
+    <ClInclude Include="..\FlashBang\code\context\AppContext.h" />
     <ClInclude Include="..\FlashBang\code\eventing\OutputKeyboardHandlers.h" />
     <ClInclude Include="..\FlashBang\code\eventing\OutputMouseHandlers.h" />
     <ClInclude Include="..\FlashBang\code\general\Converter.h" />

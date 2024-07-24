@@ -32,13 +32,16 @@ using std::vector;
 
 const string BASE_PATH = "../FlashBangProject/";
 
+using std::make_shared;
+
 BasicCardDeck::BasicCardDeck()
 {
-    _width = 1600;
-    _height = 900;
+    _appContext = make_shared<AppContext>();
+    _appContext->setWindowWidth(1600);
+    _appContext->setWindowHeight(900);
     _textureNames = 0;
     _camera = new OverheadCamera();
-    _listener = new CardDeckInputListener(_camera);
+    _listener = new CardDeckInputListener(_appContext, _camera);
     _deck = new CardDeck();
     _translator = new CardDeckEventTranslator();
 }
@@ -163,7 +166,7 @@ int BasicCardDeck::initializeWindow()
     if (!glfwInit())
         return -1;
 
-    _window = glfwCreateWindow(_width, _height, "Simulated Card Deck Prototype", NULL, NULL);
+    _window = glfwCreateWindow(_appContext->getWindowWidth(), _appContext->getWindowHeight(), "Simulated Card Deck Prototype", NULL, NULL);
     if (!_window)
     {
         glfwTerminate();
@@ -243,7 +246,7 @@ int BasicCardDeck::loadDeck(string name, float scale, int xPosition, int yPositi
 
     string baseDir = BASE_PATH + "decks/" + targetFile + "/";
 
-    _converter = new Converter(_width, _height);
+    _converter = new Converter(_appContext->getWindowWidth(), _appContext->getWindowHeight());
     _deck->setConverter(_converter);
     _deck->setUpFromBaseDir(baseDir);
 

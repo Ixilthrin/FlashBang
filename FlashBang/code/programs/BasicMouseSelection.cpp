@@ -203,7 +203,7 @@ int BasicMouseSelection::Start()
     glVertexAttribFormat(2, 2, GL_FLOAT, GL_FALSE, 0);
     glVertexAttribBinding(2, 2);
 
-    CardDeckInputListener listener(nullptr);
+    CardDeckInputListener listener{};
     listener.setDeck(&deck);
 
     GLint loc = glGetUniformLocation(programHandle, "Translation");

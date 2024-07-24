@@ -1,5 +1,6 @@
 #pragma once
 
+#include "AppContext.h"
 #include "CardDeckInputListener.h"
 #include "CardDeckEventTranslator.h"
 #include "CardDeckDispatchingMouseHandlers.h" // Interesting: putting this after next line causes link errors
@@ -11,14 +12,15 @@
 #include "CardDeck.h"
 
 #include <string>
+
 using std::string;
+using std::shared_ptr;
 
 class BasicCardDeck
 {
 private:
-    int _width;
-    int _height;
     GLFWwindow* _window;
+    shared_ptr<AppContext> _appContext;
     CardDeck *_deck;
     OverheadCamera* _camera;
     CardDeckInputListener *_listener;

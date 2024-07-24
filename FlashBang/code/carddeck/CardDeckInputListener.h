@@ -1,8 +1,12 @@
 #pragma once
 
+#include "AppContext.h"
 #include "CardDeck.h"
 #include "Card.h"
 #include "OverheadCamera.h"
+
+using std::pair;
+using std::shared_ptr;
 
 class CardDeckInputListener
 {
@@ -15,9 +19,15 @@ private:
     int _selectionStartX;
     int _selectionStartY;
     int _selectedId;
+    shared_ptr<AppContext> _context;
+    bool _soundPlayed;
+
+    pair<int, int> computeTransformation(int x, int y);
 
 public:
-    CardDeckInputListener(OverheadCamera *camera);
+    CardDeckInputListener(shared_ptr<AppContext> context, OverheadCamera *camera);
+    CardDeckInputListener();
+
     inline void setDeck(CardDeck *deck)
     {
         _deck = deck;
