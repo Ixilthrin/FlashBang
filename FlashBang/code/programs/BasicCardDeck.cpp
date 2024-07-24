@@ -555,7 +555,7 @@ void BasicCardDeck::renderFrame()
                 glBindTextureUnit(0, _textures[id]);
             }
 
-            int selected = _listener->getSelectedId();
+            /*int selected = _listener->getSelectedId();
             if (_listener->isSelectAndMoveInProgress() && selected == id)
             {
                 xTrans = _converter->screenTranslationXToNDC(_deck->get(id)->getTranslationX() + _listener->getMovementX());
@@ -589,6 +589,17 @@ void BasicCardDeck::renderFrame()
                 {
                     glUniform2f(_cameraTranslationLocation, xTrans, yTrans);
                 }
+            }*/
+
+            xTrans = _converter->screenTranslationXToNDC(_deck->get(id)->getTranslationX());
+            yTrans = _converter->screenTranslationYToNDC(_deck->get(id)->getTranslationY());
+            glUniform2f(_translationLocation, xTrans, yTrans);
+
+            xTrans = _converter->screenTranslationXToNDC(_camera->getTranslationX());
+            yTrans = _converter->screenTranslationYToNDC(_camera->getTranslationY());
+            if (_cameraTranslationLocation != -1)
+            {
+                glUniform2f(_cameraTranslationLocation, xTrans, yTrans);
             }
 
             glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, &(_indexData.data())[_indexOffsets[id]]);

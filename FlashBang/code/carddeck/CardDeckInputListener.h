@@ -11,8 +11,11 @@ using std::shared_ptr;
 class CardDeckInputListener
 {
 private:
-    int _mouseX;
-    int _mouseY;
+    pair<int, int> _mouseWorldLocation;
+    pair<int, int> _previousMouseWorldLocation;
+    pair<int, int> _initialSelectedMouseWorldLocation;
+    int _previousMouseX;
+    int _previousMouseY;
     bool _selectAndMoveInProgress;
     CardDeck *_deck;
     OverheadCamera* _camera;
@@ -37,16 +40,6 @@ public:
         _camera = camera;
     }
 
-    inline int getMovementX()
-    {
-        return _mouseX - _selectionStartX;
-    }
-
-    inline int getMovementY()
-    {
-        return _mouseY - _selectionStartY;
-    }
-
     void select(int x, int y);
     void moveSelection(int x, int y);
     void endSelect(int x, int y);
@@ -54,8 +47,6 @@ public:
     void mouseWheelMoved(float yoffset);
 
     bool isSelectAndMoveInProgress();
-    int getMouseX();
-    int getMouseY();
     int getSelectedId();
 
 };

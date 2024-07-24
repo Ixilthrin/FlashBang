@@ -151,7 +151,7 @@ void CardDeck::addImageCard(int id, int x, int y,
     int maxWidth = 500 * _scale;
     if (width > maxWidth)
     {
-        height = height / (width / maxWidth);
+        height = (float)height / ((float)width / (float)maxWidth);
         width = maxWidth;
     }
 

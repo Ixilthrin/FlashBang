@@ -256,7 +256,7 @@ int BasicMouseSelection::Start()
         if (loc != -1)
         {
             float xTrans, yTrans;
-            if (listener.isSelectAndMoveInProgress())
+            /*if (listener.isSelectAndMoveInProgress())
             {
                 xTrans = converter.screenTranslationXToNDC(card.getTranslationX() + listener.getMovementX());
                 yTrans = converter.screenTranslationYToNDC(card.getTranslationY() + listener.getMovementY());
@@ -265,7 +265,9 @@ int BasicMouseSelection::Start()
             {
                 xTrans = converter.screenTranslationXToNDC(card.getTranslationX());
                 yTrans = converter.screenTranslationYToNDC(card.getTranslationY());
-            }
+            }*/
+            xTrans = converter.screenTranslationXToNDC(card.getTranslationX());
+            yTrans = converter.screenTranslationYToNDC(card.getTranslationY());
             glUniform2f(loc, xTrans, yTrans);
         } 
 

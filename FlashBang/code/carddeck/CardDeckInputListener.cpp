@@ -9,8 +9,10 @@ using std::vector;
 CardDeckInputListener::CardDeckInputListener()
 {
     _selectAndMoveInProgress = false;
-    _mouseX = 0;
-    _mouseY = 0;
+    _initialSelectedMouseWorldLocation = make_pair<int, int>(0, 0);
+    _mouseWorldLocation = make_pair<int, int>(0, 0);
+    _initialSelectedMouseWorldLocation = make_pair<int, int>(0, 0);
+    _previousMouseWorldLocation = make_pair<int, int>(0, 0);
     _selectionStartX = 0;
     _selectionStartY = 0;
     _selectedId = -1;
@@ -52,11 +54,13 @@ pair<int, int> CardDeckInputListener::computeTransformation(int x, int y)
 
 void CardDeckInputListener::select(int x, int y)
 {
+    if (_selectAndMoveInProgress)
+        return;
+
     pair<int, int> worldCoords = computeTransformation(x, y);
 
     _soundPlayed = false;
 
-    bool itemSelected = false;
     vector<int> ids = _deck->getIds();
     auto it = ids.rbegin();
     while (it != ids.rend())
@@ -66,33 +70,20 @@ void CardDeckInputListener::select(int x, int y)
         {
             if (card->contains(worldCoords.first, worldCoords.second))
             {
-                itemSelected = true;
-                if (!_selectAndMoveInProgress)
-                {
-                    _selectionStartX = worldCoords.first;
-                    _selectionStartY = worldCoords.second;
-                    _mouseX = worldCoords.first;
-                    _mouseY = worldCoords.second;
-                }
                 _selectedId = *it;
-                _selectAndMoveInProgress = true;
                 break;
             }
         }
         it++;
     }
-    
-    if (!itemSelected)
-    {
-        if (!_selectAndMoveInProgress)
-        {
-            _selectionStartX = worldCoords.first;
-            _selectionStartY = worldCoords.second;
-            _mouseX = worldCoords.first;
-            _mouseY = worldCoords.second;
-        }
-        _selectAndMoveInProgress = true;
-    }
+
+    _selectionStartX = worldCoords.first;
+    _selectionStartY = worldCoords.second;
+    _mouseWorldLocation.first = worldCoords.first;
+    _mouseWorldLocation.second = worldCoords.second;
+    _previousMouseWorldLocation = _mouseWorldLocation;
+    _initialSelectedMouseWorldLocation = _mouseWorldLocation;
+    _selectAndMoveInProgress = true;
 }
 
 void CardDeckInputListener::moveSelection(int x, int y)
@@ -102,8 +93,7 @@ void CardDeckInputListener::moveSelection(int x, int y)
     Card *card = _deck->get(_selectedId);
     if (_selectAndMoveInProgress)
     {
-        _mouseX = worldCoords.first;
-        _mouseY = worldCoords.second;
+        _mouseWorldLocation = worldCoords;
 
         if (card)
         {
@@ -114,12 +104,23 @@ void CardDeckInputListener::moveSelection(int x, int y)
             }
 
             _deck->bringToTop(_deck->getId(card));
+
+            card->setTranslationX(card->getTranslationX() + _mouseWorldLocation.first - _previousMouseWorldLocation.first);
+            card->setTranslationY(card->getTranslationY() + _mouseWorldLocation.second - _previousMouseWorldLocation.second);
+        }
+        else
+        {
+            float transX = (float)(_mouseWorldLocation.first - _initialSelectedMouseWorldLocation.first);
+            float transY = (float)(_mouseWorldLocation.second - _initialSelectedMouseWorldLocation.second);
+            _camera->setTranslationX(_camera->getTranslationX() - transX);
+            _camera->setTranslationY(_camera->getTranslationY() - transY);
         }
     }
     else if (card && card->contains(worldCoords.first, worldCoords.second))
     {
         //std::cout << "Mouse Over" << std::endl;
     }
+    _previousMouseWorldLocation = _mouseWorldLocation;
 }
 
 void CardDeckInputListener::endSelect(int x, int y)
@@ -127,22 +128,8 @@ void CardDeckInputListener::endSelect(int x, int y)
     Card *card = _deck->get(_selectedId);
     if (_selectAndMoveInProgress)
     {
-        if (card)
-        {
-            card->setTranslationX(card->getTranslationX() + _mouseX - _selectionStartX);
-            card->setTranslationY(card->getTranslationY() + _mouseY - _selectionStartY);
-        }
-        else
-        {
-            float transX = (float)(_mouseX - _selectionStartX);
-            float transY = (float)(_mouseY - _selectionStartY);
-            float initialTransX = _camera->getTranslationX();
-            float initialTransY = _camera->getTranslationY();
-            _camera->setTranslationX(_camera->getTranslationX() - transX);
-            _camera->setTranslationY(_camera->getTranslationY() - transY);
-        }
-        _mouseX = 0;
-        _mouseY = 0;
+        _mouseWorldLocation.first = 0;
+        _mouseWorldLocation.second = 0;
         _selectionStartX = 0;
         _selectionStartY = 0;
         _selectAndMoveInProgress = false;
@@ -188,16 +175,6 @@ void CardDeckInputListener::mouseWheelMoved(float yoffset)
 bool CardDeckInputListener::isSelectAndMoveInProgress()
 {
     return _selectAndMoveInProgress;
-}
-
-int CardDeckInputListener::getMouseX()
-{
-    return _mouseX;
-}
-
-int CardDeckInputListener::getMouseY()
-{
-    return _mouseY;
 }
 
 int CardDeckInputListener::getSelectedId()
