@@ -545,6 +545,7 @@ void BasicCardDeck::renderFrame()
             {
                 glUniform1f(_rotationYLocation, 0);
             }
+
             if (card->hasFlipSide() && card->isFlipped())
             {
                 glBindTextureUnit(0, _flippedTextures[id]);
