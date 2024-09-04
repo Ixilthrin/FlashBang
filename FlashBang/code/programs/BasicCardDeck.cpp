@@ -305,7 +305,8 @@ int BasicCardDeck::setupBuffers()
     }
     glGenBuffers(1, &_vertexHandle);
     glBindBuffer(GL_ARRAY_BUFFER, _vertexHandle);
-    glNamedBufferStorage(_vertexHandle, vertexData.size() * sizeof(float), vertexData.data(), GL_DYNAMIC_STORAGE_BIT);
+    //glNamedBufferStorage(_vertexHandle, vertexData.size() * sizeof(float), vertexData.data(), GL_DYNAMIC_STORAGE_BIT);
+    glNamedBufferStorage(_vertexHandle, vertexData.size() * sizeof(float), vertexData.data(), GL_MAP_PERSISTENT_BIT | GL_MAP_WRITE_BIT);
 
     //cout << "error: " << glGetError() << endl;
     return 0;
