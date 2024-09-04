@@ -20,7 +20,7 @@ CardDeck::CardDeck(Converter *converter)
     _audioPlayer->setup();
     _scale = 1.0f;
     _initialX = 50;
-    _initialY = 50;
+    _initialY = 50; 
 }
 
 void CardDeck::setConverter(Converter *converter)
@@ -287,16 +287,20 @@ void CardDeck::getIndexData(vector<unsigned int> &indexData,
     int currentIndexOffset = 0;
     for (auto const &id : getIds())
     {
+        vector<unsigned int> currentIndices;
         auto geom = getGeometry(id);
-        auto currentIndices = geom->getIndexData();
+        currentIndices = geom->getIndexData();
+
         indexOffsets.insert(pair<int, int>(id, currentIndexOffset));
+
         currentIndexOffset += currentIndices.size();
-        for (auto const &value : currentIndices)
+
+        for (auto const &index : currentIndices)
         {
-            auto index = value + baseIndex;
-            indexData.push_back(index);
+            auto collectiveIndex = index + baseIndex;
+            indexData.push_back(collectiveIndex);
         }
-        baseIndex += geom->getPositions().size() / 3;
+        baseIndex += 4; // each card has 4 vertices
     }
 }
 

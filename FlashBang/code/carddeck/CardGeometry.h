@@ -1,9 +1,9 @@
 #pragma once
 
 #include <vector>
-
 #include "Card.h"
 #include "Converter.h"
+#include "XYZColorTex.h"
 
 using std::vector;
 
@@ -14,8 +14,6 @@ private:
     Converter *_converter;
 public:
     CardGeometry(Card *card, Converter *converter);
-    vector<float> getPositions();
-    vector<float> getColors();
-    vector<float> getTexCoords();
+    vector<XYZColorTex> getVertices();
     vector<unsigned int> getIndexData();
 };

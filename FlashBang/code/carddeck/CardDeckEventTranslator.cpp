@@ -4,35 +4,35 @@ CardDeckEventTranslator::CardDeckEventTranslator()
 {
 }
 
-void CardDeckEventTranslator::registerListener(CardDeckInputListener *listener)
+void CardDeckEventTranslator::registerEventHandler(CardDeckInputHandler *handler)
 {
-    _listener = listener;
+    _handler = handler;
 }
 
 void CardDeckEventTranslator::mouseMoved(double x, double y)
 {
-    _listener->moveSelection(x, y);
+    _handler->moveSelection(x, y);
     _mouseX = x;
     _mouseY = y;
 }
 
 void CardDeckEventTranslator::translateMouseEvent(EventType type)
 {
-    if (_listener && type == LeftMouseDown)
+    if (_handler && type == LeftMouseDown)
     {
-        _listener->select(_mouseX, _mouseY);
+        _handler->select(_mouseX, _mouseY);
     }
-    else if (_listener && type == LeftMouseUp)
+    else if (_handler && type == LeftMouseUp)
     {
-        _listener->endSelect(_mouseX, _mouseY);
+        _handler->endSelect(_mouseX, _mouseY);
     }
-    else if (_listener && type == RightMouseUp)
+    else if (_handler && type == RightMouseUp)
     {
-        _listener->flip(_mouseX, _mouseY);
+        _handler->flip(_mouseX, _mouseY);
     }
 }
 
 void CardDeckEventTranslator::translateMouseWheelMove(double yoffset)
 {
-    _listener->mouseWheelMoved(yoffset);
+    _handler->mouseWheelMoved(yoffset);
 }

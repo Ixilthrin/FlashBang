@@ -41,7 +41,7 @@ BasicCardDeck::BasicCardDeck()
     _appContext->setWindowHeight(900);
     _textureNames = 0;
     _camera = new OverheadCamera();
-    _listener = new CardDeckInputListener(_appContext, _camera);
+    _handler = new CardDeckInputHandler(_appContext, _camera);
     _deck = new CardDeck();
     _translator = new CardDeckEventTranslator();
 }
@@ -277,69 +277,37 @@ int BasicCardDeck::setupShaders()
 
 int BasicCardDeck::setupBuffers()
 {
-    int positionLength = 0;
-    int colorLength = 0;
-    int texCoordLength = 0;
+    vector<float> vertexData{};
 
     for (auto const& id : _deck->getIds())
     {
-        positionLength += _deck->getGeometry(id)->getPositions().size();
-        colorLength += _deck->getGeometry(id)->getColors().size();
-        texCoordLength += _deck->getGeometry(id)->getTexCoords().size();
+        CardGeometry* geo = _deck->getGeometry(id);
+
+        // card vertices
+        // v1 : x, y, z, r, g, b, u, v
+        // v2 : x, y, z, r, g, b, u, v
+        // v3 : x, y, z, r, g, b, u, v
+        // v4 : x, y, z, r, g, b, u, v
+
+        vector<XYZColorTex> vertices = geo->getVertices();
+
+        for (auto const& vertex : vertices)
+        {
+            vertexData.push_back(vertex.x);
+            vertexData.push_back(vertex.y);
+            vertexData.push_back(vertex.z);
+            vertexData.push_back(vertex.r);
+            vertexData.push_back(vertex.g);
+            vertexData.push_back(vertex.b);
+            vertexData.push_back(vertex.u);
+            vertexData.push_back(vertex.v);
+        }
     }
+    glGenBuffers(1, &_vertexHandle);
+    glBindBuffer(GL_ARRAY_BUFFER, _vertexHandle);
+    glNamedBufferStorage(_vertexHandle, vertexData.size() * sizeof(float), vertexData.data(), GL_DYNAMIC_STORAGE_BIT);
 
-    GLuint vboHandles[4];
-    glGenBuffers(4, vboHandles);
-
-    _positionBufferHandle = vboHandles[0];
-    _colorBufferHandle = vboHandles[1];
-    _texCoordsBufferHandle = vboHandles[2];
-    _indexCoordsBufferHandle = vboHandles[3];
-
-    // According to Red Book, glNamedBufferData() and glNamedSubBufferData() should not require
-    // the glBindBuffer() first, but it doesn't work without it.  Also, the Red Book states that
-    // GL_DYNAMIC_BUFFER_BIT should be the enum value, but that doesn't work either.
-	// GL_STATIC_DRAW is what works instead.
-    // This is a great example where documentation fails.
-
-    glBindBuffer(GL_ARRAY_BUFFER, _positionBufferHandle);
-    glNamedBufferData(_positionBufferHandle, positionLength * sizeof(float), nullptr, GL_STATIC_DRAW);
-    cout << "error: " << glGetError() << endl;
-
-    glBindBuffer(GL_ARRAY_BUFFER, _colorBufferHandle);
-    glNamedBufferData(_colorBufferHandle, colorLength * sizeof(float), nullptr, GL_STATIC_DRAW);
-
-    glBindBuffer(GL_ARRAY_BUFFER, _texCoordsBufferHandle);
-    glNamedBufferData(_texCoordsBufferHandle, texCoordLength * sizeof(float), nullptr, GL_STATIC_DRAW);
-
-    int positionsOffset = 0;
-    int colorsOffset = 0;
-    int texCoordsOffset = 0;
-
-    for (auto const& id : _deck->getIds())
-    {
-        auto geometry = _deck->getGeometry(id);
-
-        auto positions = geometry->getPositions();
-        auto positionsSize = positions.size() * sizeof(float);
-        glBindBuffer(GL_ARRAY_BUFFER, _positionBufferHandle);
-        glNamedBufferSubData(_positionBufferHandle, positionsOffset, positionsSize, positions.data());
-        
-        positionsOffset += positionsSize;
-
-        auto colors = geometry->getColors();
-        auto colorsSize = colors.size() * sizeof(float);
-        glBindBuffer(GL_ARRAY_BUFFER, _colorBufferHandle);
-        glNamedBufferSubData(_colorBufferHandle, colorsOffset, colorsSize, colors.data());
-        colorsOffset += colorsSize;
-
-        auto texCoords = geometry->getTexCoords();
-        auto texCoordsSize = texCoords.size() * sizeof(float);
-        glBindBuffer(GL_ARRAY_BUFFER, _texCoordsBufferHandle);
-        glNamedBufferSubData(_texCoordsBufferHandle, texCoordsOffset, texCoordsSize, texCoords.data());
-        texCoordsOffset += texCoordsSize;
-    }
-
+    //cout << "error: " << glGetError() << endl;
     return 0;
 }
 
@@ -365,9 +333,10 @@ int BasicCardDeck::setupBindings()
     glEnableVertexAttribArray(1);
     glEnableVertexAttribArray(2);
 
-    glBindVertexBuffer(0, _positionBufferHandle, 0, sizeof(GLfloat) * 3);
-    glBindVertexBuffer(1, _colorBufferHandle, 0, sizeof(GLfloat) * 3);
-    glBindVertexBuffer(2, _texCoordsBufferHandle, 0, sizeof(GLfloat) * 2);
+    int stride = 8 * sizeof(float);
+    glBindVertexBuffer(0, _vertexHandle, 0, stride);
+    glBindVertexBuffer(1, _vertexHandle, 3 * sizeof(float), stride);
+    glBindVertexBuffer(2, _vertexHandle, 6 * sizeof(float), stride);
 
     glVertexAttribFormat(0, 3, GL_FLOAT, GL_FALSE, 0);
     glVertexAttribBinding(0, 0);
@@ -472,10 +441,10 @@ int BasicCardDeck::cleanUp()
 
 int BasicCardDeck::setupEventListeners()
 {
-    _listener->setDeck(_deck);
-    _listener->setCamera(_camera);
+    _handler->setDeck(_deck);
+    _handler->setCamera(_camera);
     CardDeckDispatchingMouseHandlers::translator = _translator;
-    _translator->registerListener(_listener);
+    _translator->registerEventHandler(_handler);
     glfwSetCursorPosCallback(_window, CardDeckDispatchingMouseHandlers::cursor_position_callback);
     glfwSetCursorEnterCallback(_window, CardDeckDispatchingMouseHandlers::cursor_enter_callback);
     glfwSetMouseButtonCallback(_window, CardDeckDispatchingMouseHandlers::mouse_button_callback);

@@ -11,60 +11,49 @@ CardGeometry::CardGeometry(Card *card, Converter *converter)
     _converter = converter;
 }
 
-vector<float> CardGeometry::getPositions()
+vector<XYZColorTex> CardGeometry::getVertices()
 {
     float x1 = _converter->screenXToNDC(0);
     float y1 = _converter->screenYToNDC(0);
     float x2 = _converter->screenXToNDC(_card->getWidth());
     float y2 = _converter->screenYToNDC(_card->getHeight());
 
-    vector<float> positionData
+    vector<XYZColorTex> vertexData
     {
-        x1,
-        y1,
-        0.0f,
+        XYZColorTex {
+            x1,
+            y1,
+            0.0f,
+            .82f, 0.41f, 0.14f,
+            0.0f, 0.0f,
+        },
 
-        x1,
-        y2,
-        0.0f,
+        XYZColorTex {
+            x1,
+            y2,
+            0.0f,
+            .82f, 0.41f, 0.14f,
+            0.0f, 1.0f
+        },
 
-        x2,
-        y2,
-        0.0f,
+        XYZColorTex {
+            x2,
+            y2,
+            0.0f,
+            1.0f, 0.0f, 0.0f,
+            1.0f, 1.0f,
+        },
 
-        x2,
-        y1,
-        0.0f
+        XYZColorTex {
+            x2,
+            y1,
+            0.0f,
+            1.0f, 0.0f, 0.0f,
+            1.0f, 0.0f
+        }
     };
 
-    return positionData;
-}
-
-vector<float> CardGeometry::getColors()
-{
-    vector<float> colorData
-    {
-        .82f, 0.41f, 0.14f,
-        .82f, 0.41f, 0.14f,
-        1.0f, 0.0f, 0.0f,
-        1.0f, 0.0f, 0.0f
-    };
-
-    return colorData;
-}
-
-vector<float> CardGeometry::getTexCoords()
-{
-
-    vector<float> texCoords
-    {
-        0.0f, 0.0f,
-        0.0f, 1.0f,
-        1.0f, 1.0f,
-        1.0f, 0.0f
-    };
-
-    return texCoords;
+    return vertexData;
 }
 
 vector<unsigned int> CardGeometry::getIndexData()

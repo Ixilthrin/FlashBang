@@ -1,6 +1,6 @@
 #pragma once
 
-#include "CardDeckInputListener.h"
+#include "CardDeckInputHandler.h"
 #include "OverheadCamera.h"
 
 using std::shared_ptr;
@@ -10,7 +10,7 @@ class CardDeckEventTranslator
 private:
     double _mouseX;
     double _mouseY;
-    CardDeckInputListener *_listener;
+    CardDeckInputHandler * _handler;
 public:
 
     CardDeckEventTranslator();
@@ -22,7 +22,7 @@ public:
         RightMouseUp
     };
 
-    void registerListener(CardDeckInputListener *listener);
+    void registerEventHandler(CardDeckInputHandler *handler);
     void mouseMoved(double x, double y);
     void translateMouseEvent(EventType type);
     void translateMouseWheelMove(double yoffset);

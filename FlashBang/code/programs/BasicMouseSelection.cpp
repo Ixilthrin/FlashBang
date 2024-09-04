@@ -206,8 +206,8 @@ int BasicMouseSelection::Start()
     glVertexAttribFormat(2, 2, GL_FLOAT, GL_FALSE, 0);
     glVertexAttribBinding(2, 2);
 
-    CardDeckInputListener listener{_context, nullptr};
-    listener.setDeck(&deck);
+    CardDeckInputHandler handler{_context, nullptr};
+    handler.setDeck(&deck);
 
     GLint loc = glGetUniformLocation(programHandle, "Translation");
 
@@ -244,7 +244,7 @@ int BasicMouseSelection::Start()
     CardDeckEventTranslator translator{};
 
     CardDeckDispatchingMouseHandlers::translator = &translator;
-    translator.registerListener(&listener);
+    translator.registerEventHandler(&handler);
     glfwSetCursorPosCallback(window, CardDeckDispatchingMouseHandlers::cursor_position_callback);
     glfwSetCursorEnterCallback(window, CardDeckDispatchingMouseHandlers::cursor_enter_callback);
     glfwSetMouseButtonCallback(window, CardDeckDispatchingMouseHandlers::mouse_button_callback);

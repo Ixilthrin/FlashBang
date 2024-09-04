@@ -1,7 +1,7 @@
 #pragma once
 
 #include "AppContext.h"
-#include "CardDeckInputListener.h"
+#include "CardDeckInputHandler.h"
 #include "CardDeckEventTranslator.h"
 #include "CardDeckDispatchingMouseHandlers.h" // Interesting: putting this after next line causes link errors
 #include "Converter.h"
@@ -23,7 +23,7 @@ private:
     shared_ptr<AppContext> _appContext;
     CardDeck *_deck;
     OverheadCamera* _camera;
-    CardDeckInputListener *_listener;
+    CardDeckInputHandler *_handler;
     CardDeckEventTranslator *_translator;
     GLint _translationLocation;
     GLint _rotationYLocation;
@@ -31,9 +31,10 @@ private:
     GLint _zoomFactorLocation; 
     GLint _cameraTranslationLocation;
     GLuint _programHandle; 
-    GLuint _positionBufferHandle; 
-    GLuint _colorBufferHandle;
-    GLuint _texCoordsBufferHandle;
+
+    // Interleaved vertex data
+    GLuint _vertexHandle;
+
     GLuint _indexCoordsBufferHandle;
     vector<unsigned int> _indexData;
     map<int, int> _indexOffsets;

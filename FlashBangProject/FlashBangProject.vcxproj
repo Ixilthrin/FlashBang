@@ -96,7 +96,7 @@
       <AdditionalDependencies>glfw3dll.lib;OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>cp $(ProjDir)..\FlashBangDependencies\glfw-3.3\glfw-3.3.bin.WIN64\lib-vc2017\glfw3.dll  $(OutDir)</Command>
+      <Command>copy $(ProjDir)..\FlashBangDependencies\glfw-3.3\glfw-3.3.bin.WIN64\lib-vc2017\glfw3.dll  $(OutDir)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -142,7 +142,7 @@
     <ClCompile Include="..\FlashBang\code\carddeck\CardDeck.cpp" />
     <ClCompile Include="..\FlashBang\code\carddeck\CardDeckDispatchingMouseHandlers.cpp" />
     <ClCompile Include="..\FlashBang\code\carddeck\CardDeckEventTranslator.cpp" />
-    <ClCompile Include="..\FlashBang\code\carddeck\CardDeckInputListener.cpp" />
+    <ClCompile Include="..\FlashBang\code\carddeck\CardDeckInputHandler.cpp" />
     <ClCompile Include="..\FlashBang\code\carddeck\CardGeometry.cpp" />
     <ClCompile Include="..\FlashBang\code\carddeck\CardImageData.cpp" />
     <ClCompile Include="..\FlashBang\code\context\AppContext.cpp" />
@@ -188,7 +188,7 @@
     <ClInclude Include="..\FlashBang\code\carddeck\CardDeck.h" />
     <ClInclude Include="..\FlashBang\code\carddeck\CardDeckDispatchingMouseHandlers.h" />
     <ClInclude Include="..\FlashBang\code\carddeck\CardDeckEventTranslator.h" />
-    <ClInclude Include="..\FlashBang\code\carddeck\CardDeckInputListener.h" />
+    <ClInclude Include="..\FlashBang\code\carddeck\CardDeckInputHandler.h" />
     <ClInclude Include="..\FlashBang\code\carddeck\CardGeometry.h" />
     <ClInclude Include="..\FlashBang\code\carddeck\CardImageData.h" />
     <ClInclude Include="..\FlashBang\code\context\AppContext.h" />
@@ -203,6 +203,7 @@
     <ClInclude Include="..\FlashBang\code\geometry\Bounds.h" />
     <ClInclude Include="..\FlashBang\code\geometry\Polyline.h" />
     <ClInclude Include="..\FlashBang\code\geometry\XYZ.h" />
+    <ClInclude Include="..\FlashBang\code\geometry\XYZColorTex.h" />
     <ClInclude Include="..\FlashBang\code\programs\Basic3DEngine.h" />
     <ClInclude Include="..\FlashBang\code\programs\BasicCardDeck.h" />
     <ClInclude Include="..\FlashBang\code\programs\BasicGraphicsLoop.h" />
